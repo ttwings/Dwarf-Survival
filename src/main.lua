@@ -18,7 +18,9 @@ function love.load(  )
     --table.insert(Area,aoe)
     createGameObject("TiledMap",0,0)
     createGameObject("Aoe",200,500)
-    createGameObject("Dwarf",1000,300)
+    -- createGameObject("Dwarf",1000,300)
+    player = Dwarf:new(320,320)
+    table.insert(Area,player)
 end
 
 function love.update(dt)
@@ -37,5 +39,5 @@ function love.draw()
 end
 
 function love.keypressed(key, isrepeat)
-    ox,oy = aoe:keypressed(key,isrepeat,ox,oy)
+    player:keypressed(key,isrepeat)
 end

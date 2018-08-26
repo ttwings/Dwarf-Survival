@@ -25,7 +25,7 @@ local function initMap()
         for y=1,mh do
             local opid = 5
             if math.random(1,10) > 5 then
-                opid = 1
+                opid = 6
             end
             map[x][y] = {floor = grasses["grass"],obj = opid,wall = 7}
         end

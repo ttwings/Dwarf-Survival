@@ -9,6 +9,12 @@ Dwarf = Class("Dwarf")
 function Dwarf:init(x,y,opts)
     GameObject.init(self,x,y,opts)
     local pid = self.pid or 1
+    self.gx = math.floor(x/32) --- grid_x
+    self.gy = math.floor(y/32) --- grid_y
+    self.gz = 0
+    self.ax = 0  --- add grid_x by ax
+    self.ay = 0
+    self.az = 0  --- z level
     self.img = tile(pid)
 end
 
@@ -18,6 +24,39 @@ end
 
 function Dwarf:draw()
     love.graphics.draw(tileset_img,self.img,self.x,self.y)
+end
+
+function Dwarf:keypressed(key,isrepeat)
+    if key == "right" then
+        self:move(1,0)
+    elseif key == "left" then
+        self:move(-1,0)
+    end
+    if key == "up" then
+        self:move(0,-1)
+    elseif key == "down" then
+        self:move(0,1)
+    end
+    return self.x,self.y
+end
+
+function Dwarf:setMap(map)
+    self.map = map
+end
+
+function Dwarf:move(ax,ay)
+    self.gx = self.gx + ax
+    self.gy = self.gy + ay
+    self.x = self.gx * 32
+    self.y = self.gy * 32
+end
+
+function Dwarf:rampUp()
+    self.gz = self.gz + 1
+end
+
+function Dwarf:rampDow()
+    self.gz = self.gz -1
 end
 
 return Dwarf
