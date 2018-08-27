@@ -3,7 +3,6 @@
 --- Created by apple.
 --- DateTime: 2018/8/26 上午12:56
 ---
-
 Dwarf = Class("Dwarf")
 
 function Dwarf:init(x,y,opts)
@@ -15,15 +14,35 @@ function Dwarf:init(x,y,opts)
     self.ax = 0  --- add grid_x by ax
     self.ay = 0
     self.az = 0  --- z level
+
+    self.look = love.math.random()
+    self.feel = love.math.random()
+    self.hear = love.math.random()
     self.img = tile(pid)
+    self.state = {}
+    self.message = {}
+    self.map = {}
 end
 
 function Dwarf:update(dt)
-
+    self.state = {
+        "gx = " .. self.gx,
+        "gy = " .. self.gy,
+        "gz = " .. self.gz,
+        "map = " .. self.map.biome,
+        "floor = " .. self:getMapFloor()
+    }
+    self.message = {
+        "看到" .. self.look,
+        "感觉" .. self.feel,
+        "听见" .. self.hear
+    }
 end
 
 function Dwarf:draw()
     love.graphics.draw(tileset_img,self.img,self.x,self.y)
+    love.graphics.print(table.concat(self.state," "))
+    love.graphics.print(table.concat(self.message,"\n"),1000)
 end
 
 function Dwarf:keypressed(key,isrepeat)
@@ -49,6 +68,15 @@ function Dwarf:move(ax,ay)
     self.gy = self.gy + ay
     self.x = self.gx * 32
     self.y = self.gy * 32
+end
+
+function Dwarf:getMapFloor()
+    if self.map[self.gx] and self.map[self.gx][self.gy] then
+        local floor = self.map[self.gx][self.gy].floor
+        local floorName = ""
+        return floor
+    end
+    return -1
 end
 
 function Dwarf:rampUp()

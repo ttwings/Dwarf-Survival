@@ -12,15 +12,23 @@ function createGameObject(type,x,y,opts)
 end
 
 function love.load(  )
+    love.math.setRandomSeed(os.time())
     --aoe = Aoe:new(700,700)
-    tileset_img = love.graphics.newImage("asset/image/tileset.png", format)
+    font = love.graphics.newFont("asset/font/unifont.ttf",16)
+    love.graphics.setFont(font)
+    tileset_img = love.graphics.newImage("asset/image/tileset1.png", format)
     love.keyboard.setKeyRepeat(true)
     --table.insert(Area,aoe)
-    createGameObject("TiledMap",0,0)
-    createGameObject("Aoe",200,500)
+    -- createGameObject("TiledMap",0,0)
+    map = TiledMap:new(0,0)
+    -- createGameObject("Aoe",200,500)
     -- createGameObject("Dwarf",1000,300)
-    player = Dwarf:new(320,320)
+    player = Dwarf:new(320,320,{pid = 1,name = "Name1"})
+    player:setMap(map)
+    table.insert(Area,map)
+
     table.insert(Area,player)
+
 end
 
 function love.update(dt)
