@@ -32,12 +32,15 @@ function Dwarf:update(dt)
         "map = " .. self.map.biome,
         "floor = " .. self:getMapFloor()
     }
+    --- TODO 将UI与人物属性联系起来
     self.message = {
         "看到" .. self.look,
         "感觉" .. self.feel,
         "听见" .. self.hear
     }
 end
+
+--- TODO 考虑将UI 放到这里
 
 function Dwarf:draw()
     love.graphics.draw(tileset_img,self.img,self.x,self.y)

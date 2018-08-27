@@ -25,6 +25,9 @@ local function randomPid(pid_table)
     return pid_table
 end
 
+--- TODO 生成高度图
+--- TODO 生成温度图
+
 function TiledMap:initElevation()
     local elevation = {}
     local w,h,e = self.w,self.h,self.e
