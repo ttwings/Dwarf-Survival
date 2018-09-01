@@ -3,10 +3,12 @@
 --- Created by apple.
 --- DateTime: 2018/8/26 上午12:56
 ---
-Dwarf = Class("Dwarf")
+--require("GameObject")
 
-function Dwarf:init(x,y,opts)
-    GameObject.init(self,x,y,opts)
+Dwarf = GameObject:extend()
+
+function Dwarf:new(area,x,y,opts)
+    Dwarf.super.new(self,area,x,y,opts)
     local pid = self.pid or 1
     self.gx = math.floor(x/32) --- grid_x
     self.gy = math.floor(y/32) --- grid_y

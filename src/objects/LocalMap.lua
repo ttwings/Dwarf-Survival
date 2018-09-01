@@ -4,10 +4,10 @@
 --- DateTime: 2018/8/27 下午6:52
 ---
 
-LocalMap = Class("LocalMap",GameObject)
+LocalMap = Object:extend()
 
-function LocalMap:init(x,y,opts)
-    GameObject.init(self,x,y,opts)
+function LocalMap:new(x,y,opts)
+    LocalMap.super.new(self,x,y,opts)
     self.biome = opts.biome or "Mountain"
     self.elevation = opts.elevation
 end

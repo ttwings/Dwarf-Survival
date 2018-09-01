@@ -1,4 +1,4 @@
-local Aoe = Class("Aoe")
+local Aoe = Object:extend()
 Aoe.type = {}
 Aoe.type.square33 = {
 	{-1, 1},{0, 1},{1, 1},

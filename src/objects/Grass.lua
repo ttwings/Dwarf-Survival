@@ -3,9 +3,9 @@
 --- Created by apple.
 --- DateTime: 2018/8/25 下午11:37
 ---
-Grass = Class("Grass")
+Grass = Object:extend()
 
-function Grass.init(x,y,opts)
+function Grass.new(x,y,opts)
     self.x = x
     self.y = y
     if opts then

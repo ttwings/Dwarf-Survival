@@ -4,7 +4,7 @@
 --- DateTime: 2018/8/26 下午11:54
 ---
 
-local WorkShop = Class("WorkShop",GameObject)
+local WorkShop = GameObject:extend()
 
 function WorkShop:init()
     GameObject.init(self,x,y,opts)

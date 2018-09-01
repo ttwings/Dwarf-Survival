@@ -1,6 +1,6 @@
 local grasses = require("asset.data.grass")
 
-local TiledMap = Class("TiledMap",GameObject)
+local TiledMap = Object:extend()
 
 local tileset_img = love.graphics.newImage("asset/image/tileset1.png", format)
 tileset_img:setFilter("nearest","linear")

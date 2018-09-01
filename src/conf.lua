@@ -3,9 +3,12 @@
 --- Created by apple.
 --- DateTime: 2018/8/25 下午11:03
 ---
-
+gw = 640
+gh = 360
+sw = 1
+sh = 1
 function love.conf(t)
     t.title = "矮人冒险"
-    t.window.width = 1280
-    t.window.height = 720
+    t.window.width = gw*sw
+    t.window.height = gh*sh
 end
