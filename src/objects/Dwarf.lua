@@ -9,7 +9,7 @@ Dwarf = GameObject:extend()
 
 function Dwarf:new(area,x,y,opts)
     Dwarf.super.new(self,area,x,y,opts)
-    local pid = self.pid or 1
+    self.pid = opts.pid or 1
     self.gx = math.floor(x/32) --- grid_x
     self.gy = math.floor(y/32) --- grid_y
     self.gz = 0
@@ -20,10 +20,12 @@ function Dwarf:new(area,x,y,opts)
     self.look = love.math.random()
     self.feel = love.math.random()
     self.hear = love.math.random()
-    self.img = tile(pid)
+    self.tile = Tiled(self.pid,opts)
     self.state = {}
     self.message = {}
     self.map = {}
+
+    --input:press("")
 end
 
 function Dwarf:update(dt)
@@ -31,7 +33,7 @@ function Dwarf:update(dt)
         "gx = " .. self.gx,
         "gy = " .. self.gy,
         "gz = " .. self.gz,
-        "map = " .. self.map.biome,
+        --"map = " .. self.map.biome,
         "floor = " .. self:getMapFloor()
     }
     --- TODO 将UI与人物属性联系起来
@@ -45,7 +47,10 @@ end
 --- TODO 考虑将UI 放到这里
 
 function Dwarf:draw()
-    love.graphics.draw(tileset_img,self.img,self.x,self.y)
+    --love.graphics.draw(tileset_img,self.img,self.x,self.y)
+    GUI.box(1080,0,200,300)
+    self.tile:draw()
+
     love.graphics.print(table.concat(self.state," "))
     love.graphics.print(table.concat(self.message,"\n"),1000)
 end

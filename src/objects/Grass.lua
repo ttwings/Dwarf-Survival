@@ -3,15 +3,14 @@
 --- Created by apple.
 --- DateTime: 2018/8/25 下午11:37
 ---
-Grass = Object:extend()
+Grass = GameObject:extend()
 
-function Grass.new(x,y,opts)
-    self.x = x
-    self.y = y
-    if opts then
-        for k, v in pairs(opts) do
-            self[k] = v
-        end
-    end
-    self.dead = false
+function Grass:new(area,x,y,opts)
+    Grass.super.new(self,area,x,y,opts)
+    self.tiled = Tiled(3,opts)
+end
+
+
+function Grass:draw()
+    self.tiled:draw()
 end

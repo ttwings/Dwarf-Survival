@@ -16,8 +16,8 @@ function Player:new(area,x,y,opts)
     self.max_v = 100
     self.a = 100
     self.collider = self.area.world:newCircleCollider(self.x,self.y,self.w)
-    --self.area.world:addCollisionClass("Player")
-    --self.collider:setCollisionClass("Player")
+    self.area.world:addCollisionClass("Player")
+    self.collider:setCollisionClass("Player")
     self.collider:setObject(self)
 end
 

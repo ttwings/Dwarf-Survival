@@ -97,3 +97,17 @@ function type_name(o)
     end
     return global_type_table[getmetatable(o) or 0] or "Unknown"
 end
+
+GUI = {}
+
+function GUI.box(x,y,w,h,fill_color,line_color)
+    local x,y = x,y or 0,0
+    local w,h = w,h or 200,200
+    local fill_color = fill_color or {1,1,1,0.3}
+    local line_color = line_color or {1,1,1,1}
+    love.graphics.setColor(fill_color)
+    love.graphics.rectangle("fill",x,y,w,h,8)
+    love.graphics.setColor(line_color)
+    love.graphics.rectangle("line",x,y,w,h,8)
+
+end

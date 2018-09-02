@@ -5,8 +5,8 @@
 ---
 gw = 640
 gh = 360
-sw = 1
-sh = 1
+sw = 2
+sh = 2
 function love.conf(t)
     t.title = "矮人冒险"
     t.window.width = gw*sw

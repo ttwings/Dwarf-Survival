@@ -3,9 +3,9 @@ Stage = Object:extend()
 function Stage:new()
 	self.area = Area(self)
 	self.area:addPhysicsWorld()
-	self.main_canvas = love.graphics.newCanvas(gw,gh)
-	self.player = self.area:addObject("Player",gw/2,gh/2)
-	input:bind('f4',function () self.player.dead = true end )
+	self.main_canvas = love.graphics.newCanvas(gw*sw,gh*sh)
+	self.player = self.area:addObject("Dwarf",gw/2,gh/2)
+	input:bind('f4',function () self.player.die() end )
 end
 
 function Stage:update(dt)
@@ -17,6 +17,7 @@ function Stage:draw()
 	love.graphics.clear()
 		camera:attach(0,0,gw,gh)
 		--love.graphics.circle("line",gw/2,gh/2,50)
+
 		if self.area then self.area:draw() end
 		camera:detach()
 	love.graphics.setCanvas()

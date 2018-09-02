@@ -9,14 +9,7 @@ local mw,mh = 25,20
 local floorBatch = love.graphics.newSpriteBatch(tileset_img,mw*mh)
 local objBatch = love.graphics.newSpriteBatch(tileset_img,mw*mh)
 
-function tile(pid)
-    local pid = pid or 0
-    local width,height = tileset_img:getWidth(),tileset_img:getHeight()
-    local w,h = width/tile_size, height/tile_size
-    local x,y = math.floor(pid%w)*32,math.floor(pid/w)*32
-    local quad = love.graphics.newQuad(x, y, 32,32,width, height)
-    return quad
-end
+
 
 local function randomPid(pid_table)
     if type(pid_table) == "table" then
@@ -40,7 +33,6 @@ function TiledMap:initElevation()
             local n1,n2,n3,n4,n5,n6 = 1,2,4,8,16,32
             local e = noise(nx,ny)
             elevation[x][y] = noise(nx,ny)
-
         end
     end
 end

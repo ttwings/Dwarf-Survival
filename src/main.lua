@@ -4,14 +4,16 @@ Timer = require("lib.Timer")
 Camera = require("lib.Camera")
 Input = require("lib.input")
 Physics = require("lib.windfield")
+
 require("lib.util")
+
 function love.load(  )
     love.window.setMode(gw*sw,gh*sh)
     love.math.setRandomSeed(os.time())
-    --aoe = Aoe:new(700,700)
     font = love.graphics.newFont("asset/font/unifont.ttf",16)
     love.graphics.setFont(font)
     tileset_img = love.graphics.newImage("asset/image/tileset1.png", format)
+
     rooms = {}
     local object_list = {}
     recursiveEnumerate('objects',object_list)
@@ -20,13 +22,19 @@ function love.load(  )
     input = Input()
     input:bind("left","left")
     input:bind("right","right")
+    input:bind("up","up")
+    input:bind("down","down")
+    input:bind("j","d_left")
+    input:bind("k","d_down")
+    input:bind("i","d_up")
+    input:bind("l","d_right")
+    input:bind("g","start")
+    input:bind("h","back")
+
     camera = Camera()
-    
-    --input:bind("f1")
-    --input:bind("f2")
-    --input:bind("f3")
-    
+
     room1 = addRoom("Stage","room1")
+    room1.area:addObject("Grass","grass")
     current_room = room1
 end
 
