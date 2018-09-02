@@ -25,10 +25,16 @@ function Dwarf:new(area,x,y,opts)
     self.message = {}
     self.map = {}
 
-    --input:press("")
 end
 
 function Dwarf:update(dt)
+    Dwarf.super.update(self,dt)
+    if input:pressed("left")    then  self:move(-1,0)   end
+    if input:pressed("right")   then  self:move(1,0)    end
+    if input:pressed("up")      then  self:move(0,-1)   end
+    if input:pressed("down")    then  self:move(0,1)    end
+
+
     self.state = {
         "gx = " .. self.gx,
         "gy = " .. self.gy,
@@ -47,26 +53,11 @@ end
 --- TODO 考虑将UI 放到这里
 
 function Dwarf:draw()
-    --love.graphics.draw(tileset_img,self.img,self.x,self.y)
     GUI.box(1080,0,200,300)
-    self.tile:draw()
+    self.tile:draw(self.x,self.y)
 
     love.graphics.print(table.concat(self.state," "))
-    love.graphics.print(table.concat(self.message,"\n"),1000)
-end
-
-function Dwarf:keypressed(key,isrepeat)
-    if key == "right" then
-        self:move(1,0)
-    elseif key == "left" then
-        self:move(-1,0)
-    end
-    if key == "up" then
-        self:move(0,-1)
-    elseif key == "down" then
-        self:move(0,1)
-    end
-    return self.x,self.y
+    love.graphics.print(table.concat(self.message,"\n"),1080)
 end
 
 function Dwarf:setMap(map)
@@ -76,8 +67,10 @@ end
 function Dwarf:move(ax,ay)
     self.gx = self.gx + ax
     self.gy = self.gy + ay
-    self.x = self.gx * 32
-    self.y = self.gy * 32
+    --self.x = self.gx * 32
+    --self.y = self.gy * 32
+    self.timer:tween(1,self,{x = self.gx * 32,y = self.gy * 32},'in-out-cubic')
+
 end
 
 function Dwarf:getMapFloor()

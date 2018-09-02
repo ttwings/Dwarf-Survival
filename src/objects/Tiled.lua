@@ -23,7 +23,7 @@ function Tiled:quad()
     return quad
 end
 
-function Tiled:draw()
-    local x,y = self.super.x,self.super.y or 0,0
+function Tiled:draw(x,y)
+    local x,y = x,y or 0,0
     love.graphics.draw(self.img,self.quad,x,y)
 end

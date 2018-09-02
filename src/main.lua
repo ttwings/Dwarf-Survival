@@ -20,6 +20,7 @@ function love.load(  )
     requireFiles(object_list)
     
     input = Input()
+    timer = Timer()
     input:bind("left","left")
     input:bind("right","right")
     input:bind("up","up")
@@ -39,6 +40,7 @@ function love.load(  )
 end
 
 function love.update(dt)
+    if timer then timer:update(dt) end
     if current_room then current_room:update(dt) end
 end
 
