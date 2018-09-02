@@ -53,7 +53,10 @@ end
 --- TODO 考虑将UI 放到这里
 
 function Dwarf:draw()
+    GUI.box(0,0,1080,32)
     GUI.box(1080,0,200,300)
+    GUI.box(0,32,32,656)
+    GUI.box(0,688,1080,32)
     self.tile:draw(self.x,self.y)
 
     love.graphics.print(table.concat(self.state," "))
@@ -67,10 +70,10 @@ end
 function Dwarf:move(ax,ay)
     self.gx = self.gx + ax
     self.gy = self.gy + ay
-    --self.x = self.gx * 32
-    --self.y = self.gy * 32
-    self.timer:tween(1,self,{x = self.gx * 32,y = self.gy * 32},'in-out-cubic')
 
+    --self.timer:tween(1,self,{gx = self.gx + ax,gy = self.gy + ay},'linear')
+    self.x = self.gx * 32
+    self.y = self.gy * 32
 end
 
 function Dwarf:getMapFloor()

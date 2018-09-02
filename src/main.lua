@@ -21,6 +21,17 @@ function love.load(  )
     
     input = Input()
     timer = Timer()
+---- gc info
+    input:bind("f1",function ()
+        print("Before collection : " .. collectgarbage("count")/1024)
+        collectgarbage()
+        print("After collection : ".. collectgarbage("count")/1024)
+        print("object count : " )
+        local counts = type_count()
+        for k , v in pairs(counts) do print(k,v) end
+        print("------------------------------")
+    end)
+
     input:bind("left","left")
     input:bind("right","right")
     input:bind("up","up")
@@ -35,7 +46,6 @@ function love.load(  )
     camera = Camera()
 
     room1 = addRoom("Stage","room1")
-    room1.area:addObject("Grass","grass")
     current_room = room1
 end
 

@@ -4,7 +4,9 @@ function Stage:new()
 	self.area = Area(self)
 	self.area:addPhysicsWorld()
 	self.main_canvas = love.graphics.newCanvas(gw*sw,gh*sh)
+	self.map = self.area:addObject("TiledMap",0,0)
 	self.player = self.area:addObject("Dwarf",gw/2,gh/2)
+	self.player.map = self.map
 	input:bind('f4',function () self.player.die() end )
 end
 

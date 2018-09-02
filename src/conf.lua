@@ -3,6 +3,9 @@
 --- Created by apple.
 --- DateTime: 2018/8/25 下午11:03
 ---
+
+io.stdout:setvbuf("no")
+
 gw = 640
 gh = 360
 sw = 2

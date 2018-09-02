@@ -1,11 +1,11 @@
 local grasses = require("asset.data.grass")
 
-local TiledMap = Object:extend()
+TiledMap = GameObject:extend()
 
 local tileset_img = love.graphics.newImage("asset/image/tileset1.png", format)
 tileset_img:setFilter("nearest","linear")
 local tile_size = 32
-local mw,mh = 25,20
+local mw,mh = 33,21
 local floorBatch = love.graphics.newSpriteBatch(tileset_img,mw*mh)
 local objBatch = love.graphics.newSpriteBatch(tileset_img,mw*mh)
 
@@ -52,12 +52,14 @@ local function initMap()
     return map
 end
 
-function TiledMap:init(x,y,opts)
-	GameObject.init(self,x,y,opts)
+function TiledMap:new(area,x,y,opts)
+	TiledMap.super.new(self,area,x,y,opts)
 	-- updateTilesetBatch()
     self.w = 256
     self.h = 256
     self.e = 256
+    self.img = tileset_img
+    self.tile_size = opts.tile_size or 32
     self.elevation = self:initElevation()
     self.map = initMap()
     self.biome = "Mountain"
@@ -71,7 +73,8 @@ function TiledMap:update(dt)
     for x=1,mw do
         for y=1,mh do
             local floor_id = self.map[x][y].floor
-            local f_quad = tile(floor_id)
+            local quad = self:quad(floor_id)
+            local f_quad = quad
             if f_quad then
                 floorBatch:add(f_quad,x*32,y*32)
             end
@@ -83,7 +86,7 @@ function TiledMap:update(dt)
     for x=1,mw do
         for y=1,mh do
             local obj_id = self.map[x][y].obj
-            local o_quad = tile(obj_id)
+            local o_quad = self:quad(obj_id)
             if o_quad then
                 objBatch:add(o_quad,x*32,y*32)
             end
@@ -96,6 +99,15 @@ end
 function TiledMap:draw()
 	love.graphics.draw(floorBatch)
     love.graphics.draw(objBatch)
+end
+
+function TiledMap:quad(pid)
+    local pid = pid or 0
+    local width,height = self.img:getWidth(),self.img:getHeight()
+    local w,h = width/self.tile_size, height/self.tile_size
+    local x,y = math.floor(pid%w)*32,math.floor(pid/w)*32
+    local quad = love.graphics.newQuad(x, y, 32,32,width, height)
+    return quad
 end
 
 return TiledMap

@@ -7,6 +7,7 @@
 Tiled = Object:extend()
 
 function Tiled:new(pid,opts)
+    local opts = opts or {}
     self.img = opts.img or tileset_img
     self.tile_size = opts.tile_size or 32
     self.pid = pid
